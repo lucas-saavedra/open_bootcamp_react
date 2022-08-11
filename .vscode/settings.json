@@ -1,0 +1,10 @@
+{
+    "oneDarkPro.editorTheme": "VS Code",
+    "emmet.preferences": {
+    
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "html-css-class-completion.enableEmmetSupport": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "editor.snippetSuggestions": "inline"
+}
