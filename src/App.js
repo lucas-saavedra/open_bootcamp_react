@@ -1,14 +1,12 @@
 
-/* import TaskList from './components/containers/TaskList'; */
+import TaskList from './components/containers/TaskList';
 import './App.css'
-import ContactList from './components/containers/ContactList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        {/*  <TaskList /> */}
-        <ContactList />
+    <div className="App" style={{ height: '100vh' }}>
+      <header className="App-header ">
+        <TaskList />
       </header>
     </div>
   );

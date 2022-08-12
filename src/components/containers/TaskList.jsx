@@ -37,30 +37,30 @@ const TaskList = () => {
         setTasks(tempTasks)
     }
     const add = (task) => {
-        setTasks([...task, task])
+        setTasks([...tasks, task])
     }
     return (
-        <div>
-            <div className="col-md-12">
-                <div className="card">
-                    <div className="card-header p-3">
-                        <h5>
-                            Your tasks:
-                        </h5>
-                    </div>
-                    <div className="card-body" style={{ position: 'relative', height: '400px' }}>
-                        <table className="">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Pritority</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+        <div className="col-12">
+            <div className="card">
+                <div className="card-header">
+                    <h5>
+                        Your tasks:
+                    </h5>
+                </div>
+                <div className="card-body" style={{ position: 'relative', height: '15rem', overflowY: 'scroll' }}>
+                    <table className="">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Pritority</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                {tasks.map((task, index) => {
+                            {
+                                tasks.map((task, index) => {
                                     return (
                                         <TaskComponent
                                             complete={completeTask}
@@ -72,13 +72,15 @@ const TaskList = () => {
                                     )
                                 })}
 
-                            </tbody>
-                        </table>
-                    </div>
-                    <TaskForm add={add} />
+                        </tbody>
+                    </table>
+
                 </div>
+                <TaskForm add={add} />
             </div>
-        </div >
+
+        </div>
+
     )
 }
 

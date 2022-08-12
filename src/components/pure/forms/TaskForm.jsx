@@ -20,7 +20,7 @@ const TaskForm = ({ add }) => {
     return (
         <div className="row">
             <div className="col">
-                <form className='mb-4 p-3' onSubmit={addTask}>
+                <form className='mb-1 p-3' onSubmit={addTask}>
                     <div className=" mb-3">
                         <label className='sr-only mb-3' htmlFor="name">Name</label>
                         <input ref={nameRef} id='inputName' type="text" className='form-control' required autoFocus />
