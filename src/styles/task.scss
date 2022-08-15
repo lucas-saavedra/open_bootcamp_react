@@ -1,9 +1,10 @@
-.task-name {
-  font-weight: bold;
-  color: cadetblue;
+.task-completed {
+  color: gray;
+  text-decoration: line-through;
 }
-h1 {
-  color: darkorange;
+.task-pending {
+  font-weight: bold;
+  color: tomato;
 }
 .task-action {
   cursor: pointer;

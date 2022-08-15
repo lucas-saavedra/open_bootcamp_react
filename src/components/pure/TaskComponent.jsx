@@ -50,12 +50,12 @@ const TaskComponent = ({ task, complete, deleteTask }) => {
             ></i >
         );
     };
-  
+    const taskClass = `fw-normal ${task.completed ? 'task-completed' : 'task-pending'} `
     return (
-        <tr className="fw-normal">
-            <th>
+        <tr className={taskClass}>
+            < th >
                 <span className="ms-2">{task.name}</span>
-            </th>
+            </th >
             <td>
                 <span className="align-middle">{task.description}</span>
             </td>
@@ -66,7 +66,7 @@ const TaskComponent = ({ task, complete, deleteTask }) => {
                 <span className="align-middle">{taskIconCompleted()}</span>
                 <i className="bi-trash task-action" onClick={() => deleteTask(task)} style={{ color: "red", fontSize: "20px" }}></i>
             </td>
-        </tr>
+        </tr >
     );
 };
 TaskComponent.propTypes = {

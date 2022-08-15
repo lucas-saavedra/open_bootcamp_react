@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { LEVELS } from '../../../models/levels.enum';
 import { taskClass } from '../../../models/task.class';
 
-const TaskForm = ({ add }) => {
+const TaskForm = ({ add, length }) => {
     const nameRef = useRef('');
     const descriptionRef = useRef('')
-    const levelRef = useRef(LEVELS.NORMAL)
+    const levelRef = useRef(LEVELS.NORMAL);
+
     const addTask = (e) => {
         e.preventDefault();
         const newTask = new taskClass(
@@ -35,8 +36,8 @@ const TaskForm = ({ add }) => {
                         <option value={LEVELS.URGENT}>Urgent</option>
                         <option value={LEVELS.BLOCKING}>Blocking</option>
                     </select>
-                    <div className='mx-auto text-center'>
-                        <button className='btn btn-primary' type='submit'>Submit</button>
+                    <div className='mx-auto text-center btn-block'>
+                        <button className='btn btn-primary ' type='submit'>{length > 0 ? 'Submit' : 'Create'}</button>
                     </div>
                 </form>
             </div>
@@ -46,6 +47,7 @@ const TaskForm = ({ add }) => {
     )
 }
 TaskForm.propTypes = {
-    add: PropTypes.func.isRequired
+    add: PropTypes.func.isRequired,
+    length: PropTypes.number.isRequired,
 }
 export default TaskForm

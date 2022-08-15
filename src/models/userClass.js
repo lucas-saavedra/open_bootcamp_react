@@ -1,15 +1,17 @@
+import { ROLES } from "./roles.enum";
 
 
-export class userClass {
-    name = "";
-    lastname = "";
+export class User {
+
+    username = "";
     email = "";
-    connected = false;
+    password = '';
+    role = ROLES.USER;
 
-    constructor(name, lastname, email, connected) {
-        this.name = name;
-        this.lastname = lastname;
+    constructor(username, email, password, role) {
+        this.username = username;
         this.email = email;
-        this.connected = connected;
+        this.password = password;
+        this.role = role;
     }
 }
