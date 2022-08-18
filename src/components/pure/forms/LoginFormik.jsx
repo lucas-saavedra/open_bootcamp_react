@@ -1,6 +1,8 @@
-import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../../context/AuthProvider";
+import { useState } from "react";
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -10,6 +12,12 @@ const loginSchema = Yup.object().shape({
 });
 
 const LoginFormik = () => {
+    let navigate = useNavigate();
+    let location = useLocation();
+    let { error, auth, signin } = useAuth()
+    let from = location.state?.from?.pathname || "/";
+    const [errorMesssage, setErrorMesssage] = useState(null)
+
     const initialCredentials = {
         email: "",
         password: "",
@@ -24,10 +32,13 @@ const LoginFormik = () => {
                  * *Yup validation Schema
                  */
                 validationSchema={loginSchema}
-                onSubmit={async (values) => {
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
-                    alert(JSON.stringify(values, null, 2));
-                }}
+                onSubmit={
+                    async (values) => {
+                        await new Promise((resolve) => setTimeout(resolve, 1000));
+                        await signin(values);
+                        navigate(from, { replace: true })
+
+                    }}
             >
                 {({
                     values,
@@ -38,7 +49,9 @@ const LoginFormik = () => {
                     handleBlur,
                 }) => {
                     return (
-                        <Form>
+
+                        < Form >
+                            {console.log(errors)}
                             <label htmlFor="email">Email</label>
                             <Field
                                 id="email"
@@ -47,11 +60,13 @@ const LoginFormik = () => {
                                 type="email"
                             />
 
-                            {errors.email && touched.email && (
+                            {
+                                errors.email && touched.email && (
 
-                                <ErrorMessage component='div' name="email" />
+                                    <ErrorMessage component='div' name="email" />
 
-                            )}
+                                )
+                            }
                             <label htmlFor="email">Password</label>
                             <Field
                                 id="password"
@@ -59,18 +74,21 @@ const LoginFormik = () => {
                                 placeholder="Your password here"
                                 type="password"
                             />
-                            {errors.password && touched.password && (
+                            {
+                                errors.password && touched.password && (
 
-                                <ErrorMessage component='div' name="password" />
+                                    <ErrorMessage component='div' name="password" />
 
-                            )}
+                                )
+                            }
                             <button type="submit">Login</button>
+                            {errorMesssage && 'Password not correct'}
                             {isSubmitting && <p>Login......</p>}
                         </Form>
                     );
                 }}
             </Formik>
-        </div>
+        </div >
     );
 };
 

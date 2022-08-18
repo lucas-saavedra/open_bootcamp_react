@@ -1,7 +1,6 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { ROLES } from "../../../models/roles.enum";
-import { User } from "../../../models/userClass";
 
 const RegisterFormik = () => {
 
@@ -41,6 +40,7 @@ const RegisterFormik = () => {
     )
 
     const handleSubmit = (values) => {
+
         console.log(values);
     }
     return (

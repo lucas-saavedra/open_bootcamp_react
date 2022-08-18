@@ -1,30 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { LEVELS } from "../../models/levels.enum";
-import { taskClass } from "../../models/task.class"
-import TaskForm from "../pure/forms/TaskForm";
+import stroredTasks from '../../store/Tasks.js'
 import TaskFormik from "../pure/forms/TaskFormik";
 import TaskComponent from "../pure/TaskComponent";
 
 const TaskList = () => {
-    const defaultTask1 = new taskClass(
-        'Example1',
-        'Default description1',
-        true,
-        LEVELS.NORMAL
-    );
-    const defaultTask2 = new taskClass(
-        'Example2',
-        'Default description2',
-        false,
-        LEVELS.URGENT
-    );
-    const defaultTask3 = new taskClass(
-        'Example3',
-        'Default description3',
-        false,
-        LEVELS.BLOCKING
-    );
+
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setTimeout(() => {
@@ -33,7 +14,7 @@ const TaskList = () => {
 
     }, [])
 
-    const [tasks, setTasks] = useState([defaultTask1, defaultTask2, defaultTask3]);
+    const [tasks, setTasks] = useState(stroredTasks);
 
     const completeTask = (task) => {
         const findIndex = tasks.indexOf(task);
@@ -105,7 +86,7 @@ const TaskList = () => {
 
                 </div>
                 {/*   <TaskForm add={add} length={tasks.length} />  */}
-                 <TaskFormik add={add} length={tasks.length} />
+                <TaskFormik add={add} length={tasks.length} />
             </div>
 
         </div>

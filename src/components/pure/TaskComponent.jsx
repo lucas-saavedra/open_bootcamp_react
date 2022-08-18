@@ -2,12 +2,15 @@ import { taskClass } from "../../models/task.class";
 import PropTypes from "prop-types";
 import "./../../styles/task.scss";
 import { LEVELS } from "../../models/levels.enum";
+import { useNavigate } from "react-router-dom";
 const TaskComponent = ({ task, complete, deleteTask }) => {
     /**
      * Function tha returns a Badge depending
      * on the level of the task
      */
+    let navigate = useNavigate()
     const taskLevelBadge = () => {
+
         switch (task.level) {
             case LEVELS.NORMAL:
                 return (
@@ -65,6 +68,7 @@ const TaskComponent = ({ task, complete, deleteTask }) => {
             <td>
                 <span className="align-middle">{taskIconCompleted()}</span>
                 <i className="bi-trash task-action" onClick={() => deleteTask(task)} style={{ color: "red", fontSize: "20px" }}></i>
+                <i className="bi-eye task-action " onClick={() => navigate(`${task.id}`)} style={{ color: "blue", fontSize: "20px" }} ></i>
             </td>
         </tr >
     );
