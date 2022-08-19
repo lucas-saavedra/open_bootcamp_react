@@ -16,11 +16,16 @@ import RedirectIfAuth from "./utils/RedirectIfAuth";
 import DashBoard from "./pages/dashboard/DashBoard";
 import RegisterPage from "./pages/auth/RegisterPage";
 
+import ChuckJokes from "./components/pure/ChuckJokes";
+
 function App() {
   return (
-    <BrowserRouter>
-
-      <Routes>
+    <div style={{ height: '100%' }}>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<ChuckJokes />} />
+        </Routes>
+        {/* <Routes>
         <Route element={<RedirectIfAuth />}>
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
@@ -34,10 +39,13 @@ function App() {
           <Route exact path="/tasks/:id" element={<TaskDetailPage />} />
           <Route exact path="*" element={<PageNotFound />} />
         </Route>
+      </Routes> */}
 
-      </Routes>
+      </BrowserRouter >
+    </div>
 
-    </BrowserRouter >
+
+
   );
 }
 
