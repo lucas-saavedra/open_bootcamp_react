@@ -1,9 +1,7 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../../context/AuthProvider";
-import { useState } from "react";
-import { axiosLogin, getAllUsers } from "../../../services/axiosService";
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { Formik, Form, ErrorMessage, Field } from 'formik'
+import * as Yup from 'yup';
 
 const loginSchema = Yup.object().shape({
     email: Yup.string()
@@ -12,38 +10,16 @@ const loginSchema = Yup.object().shape({
     password: Yup.string().required("Password is required"),
 });
 
-const LoginFormik = () => {
-    /* let navigate = useNavigate();
-    let location = useLocation(); */
+const LoginForm = ({ logged, onLogin, fetching }) => {
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false);
-    const authUser = async (email, password) => {
-        try {
-            setLoading(true)
-            const result = await axiosLogin(email, password);
-            sessionStorage.setItem('token', result.token)
-            setLoading(false)
-
-        } catch (error) {
-            sessionStorage.removeItem('token')
-            setError(error);
-        }
-    };
-
-    /*     let from = location.state?.from?.pathname || "/"; */
-
 
     const initialCredentials = {
         email: "",
         password: "",
     };
 
-    // * CRUD
-    const obtainAllUser = async () => {
-        
-        const result = await getAllUsers();
-        console.log(result.data.data);
-    }
+
     return (
         <div>
             <h4>Login Formik</h4>
@@ -53,14 +29,12 @@ const LoginFormik = () => {
                  * *Yup validation Schema
                  */
                 validationSchema={loginSchema}
-                onSubmit={
-                    async ({ email, password }) => {
-                        await authUser(email, password)
-                        /* navigate(from, { replace: true }) */
-                    }}
+                onSubmit={async (values) => {
+                    await onLogin(values.email, values.password);
+                }
+                }
             >
                 {({
-                    values,
                     touched,
                     errors,
                     isSubmitting,
@@ -81,9 +55,7 @@ const LoginFormik = () => {
 
                             {
                                 errors.email && touched.email && (
-
                                     <ErrorMessage component='div' name="email" />
-
                                 )
                             }
                             <label htmlFor="email">Password</label>
@@ -95,15 +67,12 @@ const LoginFormik = () => {
                             />
                             {
                                 errors.password && touched.password && (
-
                                     <ErrorMessage component='div' name="password" />
-
                                 )
                             }
                             <button type="submit">Login</button>
-
+                            {fetching && < p > Login......</p>}
                             {isSubmitting && <p>Login......</p>}
-
 
                         </Form>
                     );
@@ -111,6 +80,12 @@ const LoginFormik = () => {
             </Formik>
         </div >
     );
-};
+}
 
-export default LoginFormik;
+LoginForm.propTypes = {
+    logged: PropTypes.bool.isRequired,
+    fetching: PropTypes.bool.isRequired,
+    onLogin: PropTypes.func.isRequired,
+}
+
+export default LoginForm

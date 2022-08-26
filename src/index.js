@@ -7,16 +7,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
 
+import { Provider } from 'react-redux';
 
+import AppReduxSaga from './AppReduxSaga';
+import { createAsyncAppStore } from './store/config/storeConfig';
 
+let store = createAsyncAppStore();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      {/*  <App /> */}
+      <AppReduxSaga />
+    </React.StrictMode>
+  </Provider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

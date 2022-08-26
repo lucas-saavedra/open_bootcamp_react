@@ -16,14 +16,22 @@ import RedirectIfAuth from "./utils/RedirectIfAuth";
 import DashBoard from "./pages/dashboard/DashBoard";
 import RegisterPage from "./pages/auth/RegisterPage";
 
-import ChuckJokes from "./components/pure/ChuckJokes";
+import Login from "./components/pure/Login";
+import LoginFormik from "./components/pure/forms/LoginFormik";
+import TodosContainer from "./components/containers/TodoContainer";
+import TodoFormContainer from "./components/containers/TodoFormContainer";
+import FilterOptions from "./components/pure/FilterOptions";
 
 function App() {
   return (
     <div style={{ height: '100%' }}>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<ChuckJokes />} />
+          <Route exact path="/" element={<>
+            <TodosContainer />
+            <TodoFormContainer />
+            <FilterOptions />
+          </>} />
         </Routes>
         {/* <Routes>
         <Route element={<RedirectIfAuth />}>
@@ -43,9 +51,6 @@ function App() {
 
       </BrowserRouter >
     </div>
-
-
-
   );
 }
 
